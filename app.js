@@ -128,12 +128,23 @@ function openSong(song) {
 
   player.classList.remove("hidden");
   songTitle.textContent = song.title;
-  songArtist.textContent = song.artist;
-  statusText.textContent = "Hazır";
+
+  if (songArtist) {
+    songArtist.textContent = song.artist;
+  }
+
+  if (statusText) {
+    statusText.style.color = "#cfd3ea";
+    statusText.textContent = "Hazır";
+  }
+
   playBtn.textContent = "▶ Play";
   playBtn.disabled = false;
 
-  sheetWrap.classList.add("hidden");
+  if (sheetWrap) {
+    sheetWrap.classList.add("hidden");
+  }
+
   notesContainer.classList.add("hidden");
   notesContainer.innerHTML = "";
 
@@ -148,9 +159,21 @@ function openSong(song) {
 async function startSession() {
   if (!currentSong || isPlaying) return;
 
+  if (currentSong.title !== "Ballade") {
+    if (statusText) {
+      statusText.style.color = "#ff4d4d";
+      statusText.textContent = "⚠ Bu müzik mevcut değil!";
+    }
+    return;
+  }
+
   try {
     playBtn.disabled = true;
-    statusText.textContent = "Mikrofon izni bekleniyor...";
+
+    if (statusText) {
+      statusText.style.color = "#cfd3ea";
+      statusText.textContent = "Mikrofon izni bekleniyor...";
+    }
 
     await setupMicrophone();
 
@@ -159,9 +182,13 @@ async function startSession() {
     wrongLocked = false;
 
     playBtn.textContent = "Çalıyor...";
-    statusText.textContent = `Şimdi çal: ${currentSong.notes[currentIndex]}`;
 
-    if (currentSong.image) {
+    if (statusText) {
+      statusText.style.color = "#cfd3ea";
+      statusText.textContent = `Şimdi çal: ${currentSong.notes[currentIndex]}`;
+    }
+
+    if (currentSong.image && sheetImage && sheetWrap) {
       sheetImage.src = currentSong.image;
       sheetWrap.classList.remove("hidden");
     }
@@ -170,9 +197,15 @@ async function startSession() {
     resetAllNoteStates();
     setActiveNote(currentIndex);
     startDetectionLoop();
+
   } catch (error) {
     console.error(error);
-    statusText.textContent = "Mikrofon erişimi verilmedi ya da desteklenmiyor.";
+
+    if (statusText) {
+      statusText.style.color = "#ff4d4d";
+      statusText.textContent = "Mikrofon erişimi verilmedi ya da desteklenmiyor.";
+    }
+
     playBtn.textContent = "▶ Play";
   } finally {
     playBtn.disabled = false;
@@ -255,13 +288,22 @@ function startDetectionLoop() {
       }
 
       setActiveNote(currentIndex);
-      statusText.textContent = `Doğru. Şimdi çal: ${currentSong.notes[currentIndex]}`;
+
+      if (statusText) {
+        statusText.style.color = "#cfd3ea";
+        statusText.textContent = `Doğru. Şimdi çal: ${currentSong.notes[currentIndex]}`;
+      }
     } else {
       if (wrongLocked) return;
       wrongLocked = true;
 
       markWrong(currentIndex);
-      statusText.textContent = `Yanlış nota. Beklenen: ${expectedNote}, algılanan: ${playedNote}`;
+
+      if (statusText) {
+        statusText.style.color = "#ff4d4d";
+        statusText.textContent = `Yanlış nota. Beklenen: ${expectedNote}, algılanan: ${playedNote}`;
+      }
+
       playWrongSound();
 
       setTimeout(() => {
@@ -284,7 +326,11 @@ function finishSong() {
   isPlaying = false;
   stopDetection();
   playBtn.textContent = "▶ Play";
-  statusText.textContent = "Bitti. Tekrar çalabilirsin.";
+
+  if (statusText) {
+    statusText.style.color = "#cfd3ea";
+    statusText.textContent = "Bitti. Tekrar çalabilirsin.";
+  }
 }
 
 function detectPitch() {
