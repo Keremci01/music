@@ -7,9 +7,7 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
   <div class="container">
-
     <h1>🎹 Note Player</h1>
 
     <input id="search" placeholder="Şarkı ara (örn: Ballade)" />
@@ -21,12 +19,22 @@
     <div id="songList"></div>
 
     <div id="player" class="hidden">
-      <h2 id="songTitle"></h2>
-      <button id="playBtn">▶ Play</button>
+      <div class="player-top">
+        <div>
+          <h2 id="songTitle"></h2>
+          <p id="songArtist" class="muted"></p>
+        </div>
+        <button id="playBtn">▶ Play</button>
+      </div>
 
-      <div id="notesContainer"></div>
+      <p id="statusText" class="status">Hazır</p>
+
+      <div id="sheetWrap" class="sheet-wrap hidden">
+        <img id="sheetImage" alt="Nota görseli" />
+      </div>
+
+      <div id="notesContainer" class="hidden"></div>
     </div>
-
   </div>
 
   <script src="app.js"></script>
