@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Note Player</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>🎹 Note Player</h1>
+
+    <input id="search" placeholder="Şarkı ara (örn: Ballade)" />
+
+    <select id="artistFilter">
+      <option value="">Tüm Sanatçılar</option>
+    </select>
+
+    <div id="songList"></div>
+
+    <div id="player" class="hidden">
+      <h2 id="songTitle"></h2>
+      <button id="playBtn">▶ Play</button>
+
+      <div id="notesContainer"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
