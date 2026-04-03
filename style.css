@@ -1,0 +1,73 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #0f0f14;
+  color: white;
+  margin: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+.song {
+  background: #1c1c26;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.song:hover {
+  background: #2a2a3a;
+}
+
+.hidden {
+  display: none;
+}
+
+#player {
+  margin-top: 20px;
+  padding: 15px;
+  background: #1a1a22;
+  border-radius: 10px;
+}
+
+#playBtn {
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #4a6cff;
+  color: white;
+  cursor: pointer;
+}
+
+.note {
+  display: inline-block;
+  padding: 8px;
+  margin: 4px;
+  border-radius: 6px;
+  background: #2a2a3a;
+  transition: 0.2s;
+}
+
+.note.active {
+  background: yellow;
+  color: black;
+  transform: scale(1.2);
+  box-shadow: 0 0 15px yellow;
+}
